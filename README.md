@@ -18,7 +18,7 @@
 |--------------------|---------|------------------------------|--------------------|
 | Trần Gia Hân       | 2052464 | han.tran2202@hcmut.edu.vn    | 
 | Lê Minh Mẫn        | 2312040 |                              
-| Nguyễn Thành Trình | 2313640 |                              
+| Nguyễn Thành Trình | 2313640 | trinh.nguyen020705@hcmut.edu.vn|                           
 | Ngô Quang Tân      | 2313052 | 
 | Lương Mạnh Tiến    | 2213459 |
 
