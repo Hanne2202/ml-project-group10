@@ -1,104 +1,156 @@
-# [HCMUT - 252] BÀI TẬP LỚN MÔN HỌC MÁY 
+# ml.project_group10
+[HCMUT - 252] Machine Learning Assignment
 
-## 1. THÔNG TIN MÔN HỌC
-- Tên môn học: Học máy
-- Mã môn học:  CO3117
-- Học kỳ:      HK252  
-- Năm học:     2025 - 2026
+Branch: `dev`
 
-## 2. GIẢNG VIÊN HƯỚNG DẪN
-- Giảng viên hướng dẫn: TS.Trương Vĩnh Lân
-- Thông tin liên lạc:   lantv@hcmut.edu.vn
+---
 
-## 3. THÔNG TIN NHÓM THỰC HIỆN
-- Nhóm 10                      
-- Danh sách thành viên
+## Giới thiệu
 
-|     Họ và tên      |   MSSV  |            Email             | Phân công công việc|
-|--------------------|---------|------------------------------|--------------------|
-| Trần Gia Hân       | 2052464 | han.tran2202@hcmut.edu.vn    | 
-| Lê Minh Mẫn        | 2312040 |                              
-| Nguyễn Thành Trình | 2313640 | trinh.nguyen020705@hcmut.edu.vn|                           
-| Ngô Quang Tân      | 2313052 | 
-| Lương Mạnh Tiến    | 2213459 |
+Đây là branch tích hợp chính của nhóm trong quá trình thực hiện bài tập lớn môn Machine Learning.
 
+Hiện tại, nhóm đã hoàn thành:
+- **EDA (Exploratory Data Analysis)**
+- **Data Preprocessing**
 
-## 4. MỤC TIÊU BÀI TẬP LỚN
-Bài tập lớn này nhằm xây dựng một pipeline học máy hoàn chỉnh cho bài toán phân loại thu nhập (dự đoán thu nhập của một cá nhân là trên hay dưới 50.000 USD/năm dựa trên các đặc trưng nhân khẩu học và nghề nghiệp), bao gồm các bước:
-- Khám phá dữ liệu (EDA)
-- Tiền xử lý dữ liệu
-- Trích xuất / lựa chọn đặc trưng
-- Huấn luyện mô hình học máy truyền thống
-- Đánh giá kết quả bằng các chỉ số phù hợp
-- Mở rộng với pipeline học sâu để so sánh (nếu có)
+Các phần tiếp theo sẽ được phát triển và tích hợp dần trên branch này, bao gồm:
+- **Classical / Traditional Pipeline**
+- **Deep Learning Pipeline**
+- **Final comparison & summary**
 
-Mục tiêu cuối cùng là so sánh các cấu hình và mô hình khác nhau, phân tích ưu điểm, hạn chế và rút ra kết luận phù hợp cho bài toán.
+---
 
-## 5. HƯỚNG TIẾP CẬN
-Nhóm triển khai dự án theo hai hướng chính:
+## Bài toán
 
-### 5.1. Pipeline học máy truyền thống
-- EDA: phân tích phân phối dữ liệu, missing value, tương quan giữa các đặc trưng
-- Tiền xử lý: xử lý missing value (imputation), mã hóa biến phân loại (encoding), chuẩn 
-  hóa (scaling), chia train/test
-- Giảm chiều: PCA với các mức giữ lại phương sai khác nhau (90%, 95%, 99%)
-- Huấn luyện và so sánh các mô hình:
-  + Logistic Regression
-  + Support Vector Machine (SVM)
-  + Random Forest
-- Đánh giá bằng các chỉ số:
-  + Accuracy, Precision, Recall, F1-score
-  + Confusion Matrix
+Nhóm thực hiện bài toán **phân loại thu nhập** trên bộ dữ liệu **Adult Income Dataset**.
 
-### 5.2. Pipeline học sâu / trích xuất đặc trưng hiện đại
+- **Input:** các đặc trưng nhân khẩu học và nghề nghiệp
+- **Output:** dự đoán mức thu nhập
+  - `<=50K`
+  - `>50K`
 
+---
 
-## 6. CẤU TRÚC THƯ MỤC DỰ ÁN
-```text
-project/
-├── notebooks/
-│   ├── 01_eda.ipynb                ← Phân tích khám phá dữ liệu
-│   ├── 02_preprocessing.ipynb      ← Tiền xử lý dữ liệu
-│   ├── 03_classical_pipeline.ipynb ← Pipeline ML truyền thống
-│   ├── 04_deep_learning.ipynb      ← Pipeline học sâu
-│   └── 05_main.ipynb               ← Notebook tổng hợp, chạy toàn bộ
-│
-├── modules/
-│   ├── eda.py                      ← Hàm EDA
-│   ├── preprocessing.py            ← Hàm tiền xử lý
-│   ├── classical_pipeline.py       ← Hàm pipeline truyền thống
-│   ├── deep_learning.py            ← Hàm pipeline học sâu
-│   └── utils.py                    ← Hàm tiện ích dùng chung
-│
-├── reports/
-│   └── report.pdf                  ← Báo cáo PDF
-│
-├── features/
-│   └── *.npy / *.h5                ← File đặc trưng đã trích xuất
-│
-├── .gitignore
-└── README.md
+## Tiến độ hiện tại
 
-```
+### Đã hoàn thành
+- Khảo sát dữ liệu ban đầu
+- Kiểm tra missing value và giá trị bất thường
+- Phân tích phân phối target
+- Phân tích một số đặc trưng số và đặc trưng phân loại quan trọng
+- Chuẩn hóa missing value
+- Loại bỏ một số cột không cần thiết / trùng lặp
+- Xây dựng và so sánh nhiều cấu hình preprocessing
+- Chọn shared preprocessing config hiện tại để dùng cho các bước tiếp theo
 
-- Mô tả:
- + notebooks/ : chứa các notebook làm việc và notebook tổng hợp
- + modules/   : chứa các module Python hỗ trợ, được import vào notebook
- + reports/   : chứa báo cáo PDF
- + features/  : chứa các file đặc trưng đã trích xuất
- + README.md  : mô tả dự án và hướng dẫn chạy
+### Đang triển khai
+- Classical / Traditional Pipeline
+- Deep Learning Pipeline
 
- ## 7. HƯỚNG DẪN CHẠY
+### Sẽ thực hiện tiếp
+- So sánh kết quả giữa các hướng tiếp cận
+- Tổng hợp kết quả cuối cùng
+- Hoàn thiện notebook / báo cáo cuối kỳ
 
- ### 7.1. Yêu cầu môi trường
+---
 
- ### 7.2.
+## Cấu trúc thư mục
 
-## 8. NGUỒN DỮ LIỆU
-- Tên dataset:  Adult Census Income Dataset
-- Nguồn:        Kaggle / UCI Machine Learning Repository
-- Link Kaggle:  https://www.kaggle.com/datasets/wenruliu/adult-income-dataset
-- Link UCI:     https://archive.ics.uci.edu/dataset/2/adult
-- Mô tả ngắn:   Dữ liệu điều tra dân số Mỹ (1994) gồm 48.842 mẫu, 14 đặc trưng nhân khẩu 
-                học và nghề nghiệp. Bài toán phân loại nhị phân dự đoán thu nhập cá nhân trên hoặc dưới 50.000 USD/năm.
+```bash
+notebooks/
+├── 01_eda.ipynb
+├── 02_preprocessing.ipynb
+├── 03_classical_pipeline.ipynb
+├── 04_deep_learning.ipynb
+└── 05_main.ipynb
+````
+
+### Mô tả các notebook
+
+* `01_eda.ipynb`: phân tích khám phá dữ liệu
+* `02_preprocessing.ipynb`: tiền xử lý dữ liệu và so sánh các cấu hình preprocessing
+* `03_classical_pipeline.ipynb`: triển khai pipeline truyền thống
+* `04_deep_learning.ipynb`: triển khai pipeline học sâu
+* `05_main.ipynb`: notebook tổng hợp / kết quả cuối cùng
+
+> Lưu ý: một số notebook có thể đang được hoàn thiện dần và sẽ tiếp tục được cập nhật trên branch `dev`.
+
+---
+
+## EDA
+
+Notebook `01_eda.ipynb` tập trung vào:
+
+* tổng quan dữ liệu
+* kiểu dữ liệu và thống kê mô tả
+* kiểm tra missing value
+* phân phối biến mục tiêu
+* phân tích các đặc trưng quan trọng theo target
+* kiểm tra một số biến có outlier hoặc phân phối lệch
+
+EDA được dùng để hỗ trợ các quyết định ở bước preprocessing và định hướng cho phần modeling.
+
+---
+
+## Preprocessing
+
+Notebook `02_preprocessing.ipynb` hiện đang là cơ sở cho phần modeling tiếp theo.
+
+Các bước chính:
+
+* thay thế `?` bằng `NaN`
+* loại bỏ:
+
+  * `education`
+  * `fnlwgt`
+* tách `X` và `y`
+* chia train/test
+* xác định numerical features và categorical features
+* xây dựng nhiều cấu hình preprocessing
+* so sánh các cấu hình để chọn shared config hiện tại
+
+### Shared preprocessing config hiện tại
+
+`config_2_onehot_constant_standard`
+
+Cấu hình này hiện được dùng làm mốc chung cho các bước triển khai tiếp theo. Nếu sau này nhóm thống nhất đổi config, cần cập nhật lại notebook liên quan và ghi rõ trong commit.
+
+---
+
+## Hướng phát triển tiếp theo
+
+### 1. Classical / Traditional Pipeline
+
+* huấn luyện và đánh giá các mô hình học máy truyền thống
+* tuning và so sánh kết quả
+* phân tích hiệu năng giữa các cấu hình / mô hình
+
+### 2. Deep Learning Pipeline
+
+* xây dựng mô hình học sâu phù hợp với dữ liệu tabular
+* huấn luyện, theo dõi loss / metric
+* đánh giá và so sánh với pipeline truyền thống
+
+### 3. Final Summary
+
+* tổng hợp kết quả
+* so sánh hai hướng tiếp cận
+* rút ra kết luận cuối cùng
+
+---
+
+## Quy ước làm việc trên branch `dev`
+
+* `dev` là branch tích hợp chung của nhóm
+* các thay đổi lớn nên được thực hiện trước trên branch nhiệm vụ riêng, sau đó mới merge vào `dev`
+* không chỉnh sửa trực tiếp các file tổng hợp khi chưa thống nhất
+* khi update notebook, nên đảm bảo notebook có thể chạy lại hợp lý
+* khi shared config thay đổi, cần ghi rõ trong commit / pull request
+
+---
+
+## Ghi chú
+
+* Các notebook có thể tiếp tục được cập nhật trong quá trình nhóm hoàn thiện project
+* README này sẽ được điều chỉnh thêm khi branch `dev` tích hợp xong phần classical pipeline và deep learning pipeline
 
