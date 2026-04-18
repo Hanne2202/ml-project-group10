@@ -51,6 +51,25 @@ Nhóm triển khai dự án theo hai hướng chính:
   + Confusion Matrix
 
 ### 5.2. Pipeline học sâu / trích xuất đặc trưng hiện đại
+- EDA: phân tích phân phối dữ liệu, missing value, tương quan giữa các đặc trưng
+- Tiền xử lý:
+  + Chuẩn hóa giá trị thiếu (`?` → `NaN`), imputation bằng `most_frequent` cho biến phân loại
+  + Gom nhóm các category hiếm (tần suất < 1%) thành nhãn `"Other"` (fit trên train, transform val/test)
+  + Mã hóa: `StandardScaler` cho đặc trưng số, `OneHotEncoder` cho đặc trưng phân loại
+  + Chia dữ liệu: train / val / test theo tỉ lệ 64% / 16% / 20% (stratified)
+- Mô hình: 
+  + Mạng MLP (Multi-Layer Perceptron) với kiến trúc tuỳ chỉnh:
+      . Các hidden layer gồm: `Linear → BatchNorm1d → ReLU → Dropout`
+      . Lớp đầu ra: 1 neuron (raw logit) cho phân loại nhị phân
+      . Cấu hình mặc định: hidden dims `[128, 64]`, dropout `0.2`
+  + TabNet (`pytorch-tabnet`): mô hình học sâu chuyên biệt cho dữ liệu bảng, sử dụng cơ chế Attention theo từng bước để chọn lọc đặc trưng:
+      . Các siêu tham số chính: `n_d` = `n_a` = 32 (chiều rộng decision/attention), `n_steps` = 3 (số bước attention)
+      . Tự động xử lý mất cân bằng lớp qua `weights=1`
+      . Early Stopping theo `val logloss` với `patience = 10`
+- Đánh giá:
+  + Accuracy, Precision, Recall, F1-score, Classification Report
+  + Confusion Matrix
+  + Learning curves (loss và accuracy theo epoch, chỉ MLP)
 
 
 ## 6. CẤU TRÚC THƯ MỤC DỰ ÁN
