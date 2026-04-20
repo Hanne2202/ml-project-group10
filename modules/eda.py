@@ -37,8 +37,6 @@ def check_missing_values(df: pd.DataFrame):
     print(df.isnull().sum())
     print("\n=== '?' count per column ===")
     print((df == '?').sum())
-    print("\n=== '?' percentage (%) ===")
-    print(((df == '?').sum() / len(df) * 100).round(2))
 
 
 def inspect_categorical_values(df: pd.DataFrame, cat_cols: list, top_n: int = 10):

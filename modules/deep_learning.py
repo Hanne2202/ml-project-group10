@@ -535,40 +535,46 @@ def train_model(
     weight_decay: float = 1e-4,   # Kĩ thuật regularization L2 giúp tránh overfitting bằng cách phạt các trọng số lớn
     patience: int = 10,           # Số epoch liên tiếp không cải thiện val_loss để dừng sớm
     device: str = None,
+    use_pos_weight: bool = True,  # False khi đã dùng SMOTE (dữ liệu train đã cân bằng)
 ):
     """
     Vòng huấn luyện chính với Early Stopping theo val_loss.
+
+    Parameters
+    ----------
+    use_pos_weight : bool, default=True
+        Có tính pos_weight để bù class imbalance hay không.
+        Đặt False khi train data đã được cân bằng bằng SMOTE.
 
     Returns
     -------
     history : dict  (train_loss, val_loss, train_acc, val_acc theo từng epoch)
     """
 
-    # Đây model lên device (GPU nếu có) trước khi tạo criterion/optimizer để đảm bảo pos_weight cũng được chuyển đúng
+    # Đưa model lên device (GPU nếu có) trước khi tạo criterion/optimizer
     model = model.to(device)
 
-    # Xử lý class imbalance bằng pos_weight cho BCEWithLogitsLoss
+    # ── Định nghĩa Loss criterion ──────────────────────────────────────────
+    if use_pos_weight:
+        # Tính pos_weight từ phân phối thực của train để bù class imbalance
+        y_train_all = []
+        for _, y_batch in train_loader:
+            y_train_all.append(y_batch)
+        y_train_all = torch.cat(y_train_all)
 
-
-    y_train_all = []
-    # Duyệt toàn bộ train_loader để lấy tất cả y_train
-    for _, y_batch in train_loader:
-        y_train_all.append(y_batch)
-    # Kết hợp tất cả batch lại thành một tensor duy nhất
-    y_train_all = torch.cat(y_train_all)
-
-    class_weights = _compute_balanced_class_weights(y_train_all.cpu().numpy())
-    w0 = class_weights.get(0, 1.0)
-    w1 = class_weights.get(1, 1.0)
-    pos_weight = torch.tensor(w1 / w0, dtype=torch.float32)
-    print(
-        f"Balanced class weights (train): {class_weights} | "
-        f"BCE pos_weight (w1/w0): {pos_weight.item():.4f}"
-    )
-
-    # Định nghĩa hàm Loss: BCEWithLogitsLoss tích hợp sẵn Sigmoid vào bên trong, và sử dụng pos_weight để xử lý imbalance
-    # Biến logits đầu ra của model sẽ được sigmoid chuyển thành xác suất, sau đó tính binary cross-entropy loss với y_batch
-    criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight.to(device))
+        class_weights = _compute_balanced_class_weights(y_train_all.cpu().numpy())
+        w0 = class_weights.get(0, 1.0)
+        w1 = class_weights.get(1, 1.0)
+        pos_weight = torch.tensor(w1 / w0, dtype=torch.float32)
+        print(
+            f"Balanced class weights (train): {class_weights} | "
+            f"BCE pos_weight (w1/w0): {pos_weight.item():.4f}"
+        )
+        criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight.to(device))
+    else:
+        # SMOTE đã cân bằng dữ liệu train → dùng loss không trọng số
+        print("use_pos_weight=False: BCEWithLogitsLoss không trọng số (train data đã cân bằng bằng SMOTE).")
+        criterion = nn.BCEWithLogitsLoss()
 
     # Định nghĩa optimizer: Adam với learning rate và weight decay
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)

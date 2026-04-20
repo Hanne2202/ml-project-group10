@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "category-encoders>=2.8.1",
+    "imbalanced-learn>=0.14.1",
     "ipykernel>=7.2.0",
     "matplotlib>=3.10.8",
     "numpy>=2.2.6",
@@ -13,5 +14,6 @@ dependencies = [
     "pandas>=2.3.3",
     "pytorch-tabnet>=4.1.0",
     "scikit-learn>=1.7.2",
+    "seaborn>=0.13.2",
     "torch>=2.11.0",
 ]
