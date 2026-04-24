@@ -298,7 +298,10 @@ def preprocess_for_tabnet(
         data.drop(columns=cols_to_drop, errors="ignore", inplace=True)
 
     X = data.drop(columns=[target_col])
-    y = data[target_col].map({"<=50K": 0, ">50K": 1}).astype(int)
+    if pd.api.types.is_numeric_dtype(data[target_col]):
+        y = data[target_col].astype(int)
+    else:
+        y = data[target_col].astype(str).str.strip().map({"<=50K": 0, ">50K": 1}).astype(int)
 
     X_train_full, X_test, y_train_full, y_test = train_test_split(
         X, y, test_size=test_size, random_state=random_state, stratify=y

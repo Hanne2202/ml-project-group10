@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import optuna
 from sklearn.metrics import f1_score
+import copy
 
 try:
     from modules.deep_learning import (
@@ -75,7 +76,8 @@ def _optuna_objective(trial, prep, epochs, patience, device):
 
         if val_loss < best_val_loss:
             best_val_loss = val_loss
-            best_state = model.state_dict().copy()
+            # best_state = model.state_dict().copy()
+            best_state = copy.deepcopy(model.state_dict())
             epochs_no_improve = 0
         else:
             epochs_no_improve += 1
@@ -215,7 +217,8 @@ def train_best_optuna_model(
 
         if val_loss < best_val_loss:
             best_val_loss = val_loss
-            best_state = model.state_dict().copy()
+            # best_state = model.state_dict().copy()
+            best_state = copy.deepcopy(model.state_dict())
             epochs_no_improve = 0
             marker = " *"
         else:
