@@ -341,13 +341,33 @@ def run_baseline(
 
 
 def print_best_model_summary(results_df: pd.DataFrame, stage: str = "Baseline"):
-    """In thông tin mô hình tốt nhất từ bảng kết quả."""
+    """
+    In thông tin mô hình tốt nhất từ bảng kết quả.
+
+    Tương thích với cả hai schema:
+    - Baseline: accuracy, precision, recall, f1_score, roc_auc
+    - Tuned   : test_accuracy, test_precision, test_recall, test_f1_score, test_roc_auc
+    """
     best = results_df.iloc[0]
+
+    # Mapping: tên hiển thị → tên cột (thử test_* trước, fallback về tên gốc)
+    col_map = {
+        "feature_set": "feature_set",
+        "model":       "model",
+        "accuracy":    "test_accuracy"  if "test_accuracy"  in best.index else "accuracy",
+        "precision":   "test_precision" if "test_precision" in best.index else "precision",
+        "recall":      "test_recall"    if "test_recall"    in best.index else "recall",
+        "f1_score":    "test_f1_score"  if "test_f1_score"  in best.index else "f1_score",
+        "roc_auc":     "test_roc_auc"   if "test_roc_auc"   in best.index else "roc_auc",
+    }
+
     print(f"Best {stage} model:")
-    for col in ["feature_set", "model", "accuracy", "precision",
-                "recall", "f1_score", "roc_auc"]:
+    print("-" * 50)
+    for display_name, col in col_map.items():
+        if col not in best.index:
+            continue
         val = best[col]
-        print(f"  {col:20s}: {round(val, 4) if isinstance(val, float) else val}")
+        print(f"  {display_name:20s}: {round(val, 4) if isinstance(val, float) else val}")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
