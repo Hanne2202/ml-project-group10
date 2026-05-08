@@ -135,6 +135,7 @@ def run_optuna_search(
 
     study = optuna.create_study(
         direction="maximize",
+        sampler=optuna.samplers.TPESampler(seed=42),
         pruner=optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=10),
         study_name="MLP-Adult-Income",
     )
@@ -362,6 +363,7 @@ def run_optuna_search_tabnet(
     study_name = "TabNet-Adult-Pretrain" if use_pretraining else "TabNet-Adult"
     study = optuna.create_study(
         direction="maximize",
+        sampler=optuna.samplers.TPESampler(seed=42),
         pruner=optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=5),
         study_name=study_name,
     )

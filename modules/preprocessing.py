@@ -757,12 +757,16 @@ def preprocess_for_tabnet(
       - Categorical giữ dạng integer encoding (không OHE)
         để TabNet dùng embedding layer nội bộ.
       - Trả về metadata cat_idxs / cat_dims cho TabNet.
-      - Binning được bật mặc định (use_binning=True).
+      - Binning được bật mặc định (use_binning=True): các cột số liên tục
+        (mặc định là 'age' và 'hours-per-week') được chia thành n_bins bucket
+        và chuyển thành biến categorical integer — khác với pipeline MLP vốn
+        giữ nguyên các cột số này.
 
     Parameters
     ----------
     df : pd.DataFrame
-        DataFrame gốc (chưa qua bước nào).
+        DataFrame đã qua bước làm sạch cơ bản (drop_columns, drop_missing_values,
+        map_target_variable). Hàm sẽ tự xử lý imputation và encoding nội bộ.
     target_col : str, default='income'
     cols_to_drop : list hoặc None
     cat_impute_strategy : str, default='most_frequent'

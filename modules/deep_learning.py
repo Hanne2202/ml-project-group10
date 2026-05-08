@@ -57,7 +57,7 @@ class TabularDataset(Dataset):
         return self.X[idx], self.y[idx]
 
 
-def create_dataloaders(prep: dict, batch_size: int = 256, num_workers: int = 0):
+def create_dataloaders(prep: dict, batch_size: int = 256, num_workers: int = 0, seed: int = 42):
     """
     Tạo DataLoader cho train / val / test từ output của preprocess_for_dl.
 
@@ -67,6 +67,9 @@ def create_dataloaders(prep: dict, batch_size: int = 256, num_workers: int = 0):
         Chứa X_train, X_val, X_test, y_train, y_val, y_test (np.ndarray).
     batch_size : int, default=256
     num_workers : int, default=0
+    seed : int, default=42
+        Seed cho torch.Generator của train_loader (shuffle=True) để đảm bảo
+        thứ tự batch giống nhau mỗi lần chạy.
 
     Returns
     -------
@@ -76,7 +79,10 @@ def create_dataloaders(prep: dict, batch_size: int = 256, num_workers: int = 0):
     val_ds   = TabularDataset(prep["X_val"],   prep["y_val"])
     test_ds  = TabularDataset(prep["X_test"],  prep["y_test"])
 
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True,  num_workers=num_workers)
+    g = torch.Generator()
+    g.manual_seed(seed)
+    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True,
+                              generator=g, num_workers=num_workers)
     val_loader   = DataLoader(val_ds,   batch_size=batch_size, shuffle=False, num_workers=num_workers)
     test_loader  = DataLoader(test_ds,  batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
