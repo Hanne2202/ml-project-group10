@@ -1,0 +1,26 @@
+# Machine Learning coursework — Adult Income classification
+# Python: khuyến nghị 3.10–3.12 (đã kiểm tra tương thích với PyTorch / sklearn)
+
+numpy>=1.23.5,<3
+pandas>=2.0.0,<3
+scipy>=1.10.0,<2
+scikit-learn>=1.3.0,<2
+matplotlib>=3.7.0,<4
+seaborn>=0.13.0,<1
+joblib>=1.3.0,<2
+
+# SMOTE và pipeline cân lớp — dùng trong modules/preprocessing.py
+imbalanced-learn>=0.12.0,<1
+
+# Deep learning (MLP) — modules/deep_learning.py, modules/tuning.py
+torch>=2.1.0,<3
+
+# TabNet — import lazy trong modules/deep_learning.py
+pytorch-tabnet>=4.0,<5
+
+# Tuning hyperparameter — modules/tuning.py
+optuna>=3.5.0,<5
+
+# Chạy notebook cục bộ
+jupyter>=1.0.0,<2
+ipykernel>=6.25.0,<7

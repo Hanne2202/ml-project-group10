@@ -1,22 +1,16 @@
-# ml.project_group10
+# ml-project-group10
+
 [HCMUT - 252] Machine Learning Assignment
 
-Branch: `dev`
+Branch tích hợp chính: `dev`
 
 ---
 
 ## Giới thiệu
 
-Đây là branch tích hợp chính của nhóm trong quá trình thực hiện bài tập lớn môn Machine Learning.
+Đây là repository tích hợp chính của nhóm trong quá trình thực hiện bài tập lớn môn Machine Learning.
 
-Hiện tại, nhóm đã hoàn thành:
-- **EDA (Exploratory Data Analysis)**
-- **Data Preprocessing**
-
-Các phần tiếp theo sẽ được phát triển và tích hợp dần trên branch này, bao gồm:
-- **Classical / Traditional Pipeline**
-- **Deep Learning Pipeline**
-- **Final comparison & summary**
+Đã có đầy đủ các phần: **EDA**, **tiền xử lý**, **pipeline classical**, **pipeline deep learning (MLP / TabNet)**, và **notebook tổng hợp** trong thư mục `notebooks/`. Chi tiết từng notebook xem phần [Cấu trúc thư mục](#cấu-trúc-thư-mục).
 
 ---
 
@@ -43,27 +37,102 @@ Nhóm thực hiện bài toán **phân loại thu nhập** trên bộ dữ liệ
 - Xây dựng và so sánh nhiều cấu hình preprocessing
 - Chọn shared preprocessing config hiện tại để dùng cho các bước tiếp theo
 
-### Đang triển khai
-- Classical / Traditional Pipeline
-- Deep Learning Pipeline
+### Đã có trong notebook
+- Classical / Traditional Pipeline (`03_classical_pipeline.ipynb`)
+- Deep Learning Pipeline — MLP và TabNet (`04_deep_learning.ipynb`)
+- Notebook tổng hợp (`05_main.ipynb`)
 
-### Sẽ thực hiện tiếp
-- So sánh kết quả giữa các hướng tiếp cận
-- Tổng hợp kết quả cuối cùng
-- Hoàn thiện notebook / báo cáo cuối kỳ
+### Sẽ chỉnh sửa / bổ sung khi cần
+- So sánh và trình bày kết quả trong báo cáo cuối kỳ
+- Tinh chỉnh thử nghiệm (ví dụ bật lại các cell Optuna tốn thời gian)
+
+---
+
+## Yêu cầu
+
+- **Python:** khuyến nghị 3.10, 3.11 hoặc 3.12 (tương thích PyTorch và scikit-learn).
+- **RAM / thời gian chạy:** notebook deep learning và TabNet tốn tài nguyên hơn classical ML; có thể chạy trên CPU (chậm hơn GPU).
+- **Mạng:** notebook EDA và các notebook sau tải dữ liệu từ URL công khai (GitHub); cần kết nối Internet khi chạy lần đầu.
+
+---
+
+## Cài đặt và chạy
+
+### 1. Clone repository
+
+```bash
+git clone https://github.com/Hanne2202/ml-project-group10.git
+cd ml-project-group10
+```
+
+### 2. Tạo môi trường ảo (khuyến nghị)
+
+**Windows (PowerShell):**
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+**Linux / macOS:**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Cài các thư viện
+
+```bash
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+**PyTorch với GPU (CUDA):** `pip install -r requirements.txt` thường cài bản PyTorch hỗ trợ CPU. Nếu cần GPU, cài trước PyTorch (build CUDA) theo lệnh tại [pytorch.org](https://pytorch.org/get-started/locally/), sau đó cài phần còn lại; nếu `pip` cố ghi đè PyTorch, tạm thời bỏ hoặc comment dòng `torch` trong `requirements.txt` rồi chạy lại `pip install -r requirements.txt`.
+
+### 4. Khởi chạy Jupyter
+
+Từ thư mục gốc của project:
+
+```bash
+jupyter notebook
+```
+
+hoặc dùng JupyterLab / VS Code mở từng file `.ipynb` trong `notebooks/`.
+
+### 5. Thứ tự và cách chạy notebook
+
+- Các notebook gắn thư mục `modules/` bằng `sys.path.insert(0, os.path.abspath('..'))`, nghĩa là **`modules` là gói Python ở cấp cha của `notebooks/`**. Hãy mở hoặc chạy notebook khi working directory là `notebooks/` (cách Jupyter mặc định khi mở file trong thư mục đó) để đường dẫn tương đối đúng.
+- **Thứ tự khuyến nghị:**
+  1. `01_eda.ipynb` — khám phá dữ liệu  
+  2. `02_preprocessing.ipynb` — tiền xử lý, chọn shared config  
+  3. `03_classical_pipeline.ipynb` — mô hình truyền thống  
+  4. `04_deep_learning.ipynb` — MLP, TabNet, Optuna (một số cell Optuna được mock / comment để chạy nhanh; có thể bật lại để chạy đầy đủ, thời gian lâu)  
+  5. `05_main.ipynb` — tổng hợp pipeline (tuỳ mục đích báo cáo)
+
+Notebook `05_main.ipynb` có thể chạy độc lập nếu đã có đầy đủ thư viện và dữ liệu tải được; các notebook khác nên đọc theo thứ tự để hiểu luồng xử lý.
 
 ---
 
 ## Cấu trúc thư mục
 
-```bash
-notebooks/
-├── 01_eda.ipynb
-├── 02_preprocessing.ipynb
-├── 03_classical_pipeline.ipynb
-├── 04_deep_learning.ipynb
-└── 05_main.ipynb
-````
+```text
+ml-project-group10/
+├── modules/                    # Logic Python dùng chung cho notebook
+│   ├── eda.py
+│   ├── preprocessing.py
+│   ├── classical_learning.py
+│   ├── deep_learning.py
+│   └── tuning.py
+├── notebooks/
+│   ├── 01_eda.ipynb
+│   ├── 02_preprocessing.ipynb
+│   ├── 03_classical_pipeline.ipynb
+│   ├── 04_deep_learning.ipynb
+│   └── 05_main.ipynb
+├── requirements.txt
+└── README.md
+```
 
 ### Mô tả các notebook
 
@@ -151,6 +220,6 @@ Cấu hình này hiện được dùng làm mốc chung cho các bước triển
 
 ## Ghi chú
 
-* Các notebook có thể tiếp tục được cập nhật trong quá trình nhóm hoàn thiện project
-* README này sẽ được điều chỉnh thêm khi branch `dev` tích hợp xong phần classical pipeline và deep learning pipeline
+- Cập nhật shared preprocessing (`config_*` trong `02_preprocessing.ipynb`) thì nhớ đồng bộ các notebook phía sau và ghi rõ trong commit.
+- Cell chạy Optuna / huấn luyện dài trong `04_deep_learning.ipynb` và `05_main.ipynb` có thể được giữ mock hoặc comment để chạy nhanh; khi báo cáo cần số đo mới, bật chạy lại và chờ đủ thời gian.
 
