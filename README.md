@@ -51,19 +51,6 @@ Nhóm thực hiện bài toán **phân loại thu nhập** (binary classificatio
 
 ---
 
-## Kết quả tóm tắt
-
-| Mô hình | Accuracy | F1-Score | ROC-AUC |
-|---|---|---|---|
-| Logistic Regression (baseline) | 0.8074 | 0.6760 | 0.9051 |
-| **Random Forest (tuned)** ✅ | **0.8341** | **0.7050** | **0.9175** |
-| MLP (Optuna) | 0.8101 | 0.6919 | 0.9102 |
-| TabNet (Optuna) | 0.8136 | 0.6835 | 0.9029 |
-
-**Mô hình tốt nhất:** Random Forest (tuned) — pipeline học máy truyền thống với F1-Score = 0.7050, ROC-AUC = 0.9175.
-
----
-
 ## Yêu cầu hệ thống
 
 - **Python:** 3.10, 3.11 hoặc 3.12 (khuyến nghị)
