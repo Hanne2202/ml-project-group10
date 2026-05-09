@@ -25,7 +25,7 @@
 
 | Tài nguyên | Đường dẫn |
 |---|---|
-| 📄 Báo cáo PDF | [final\_report.pdf](https://drive.google.com/file/d/13vJRvyGfGy5Ekt_nNqUdP70kaATBIRl-/view?usp=drive_link) |
+| 📄 Báo cáo PDF | [final\_report.pdf](https://drive.google.com/file/d/1gwayBS9MjzFTXSfKMs8g_Ds2c7YZDkOk/view?usp=drive_link) |
 | 🔗 Google Colab | [BTL\_Machine\_Learning.ipynb](https://colab.research.google.com/drive/1LskLJh_-S8esA2RgfWagCwlj2WNw-m_0?usp=sharing) |
 
 ---
