@@ -2,8 +2,6 @@
 
 > **Môn học:** Học Máy — **Mã môn:** CO3117 — **Học kỳ:** 252 — **Năm học:** 2025–2026
 
-Branch tích hợp chính: `dev`
-
 ---
 
 ## Thông tin nhóm
