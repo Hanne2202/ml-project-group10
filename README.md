@@ -1,58 +1,75 @@
 # ml-project-group10
 
-[HCMUT - 252] Machine Learning Assignment
+> **Môn học:** Học Máy — **Mã môn:** CO3117 — **Học kỳ:** 252 — **Năm học:** 2025–2026
 
 Branch tích hợp chính: `dev`
 
 ---
 
-## Giới thiệu
+## Thông tin nhóm
 
-Đây là repository tích hợp chính của nhóm trong quá trình thực hiện bài tập lớn môn Machine Learning.
+| Họ và tên | MSSV | Email | Ghi chú |
+|---|---|---|---|
+| Trần Gia Hân | 2052464 | han.tran2202@hcmut.edu.vn | Nhóm trưởng |
+| Lê Minh Mẫn | 2312040 | man.le9905@hcmut.edu.vn | |
+| Nguyễn Thành Trình | 2313640 | trinh.nguyen020705@hcmut.edu.vn | |
+| Ngô Quang Tân | 2313052 | tan.ngo196@hcmut.edu.vn | |
+| Lương Mạnh Tiến | 2213459 | | |
 
-Đã có đầy đủ các phần: **EDA**, **tiền xử lý**, **pipeline classical**, **pipeline deep learning (MLP / TabNet)**, và **notebook tổng hợp** trong thư mục `notebooks/`. Chi tiết từng notebook xem phần [Cấu trúc thư mục](#cấu-trúc-thư-mục).
+**Giảng viên hướng dẫn (GVHD):** Trường Vĩnh Lân  
+**Lớp:** L01 — **Nhóm:** 10
+
+---
+
+## Tài nguyên
+
+| Tài nguyên | Đường dẫn |
+|---|---|
+| 📄 Báo cáo PDF | [final\_report.pdf](https://drive.google.com/file/d/1VwfrjaARU0-Mgm6kccpsh-jXPsgWhNKY/view?usp=sharing) |
+| 🔗 Google Colab | [BTL\_Machine\_Learning.ipynb](https://colab.research.google.com/drive/1LskLJh_-S8esA2RgfWagCwlj2WNw-m_0?usp=sharing) |
 
 ---
 
 ## Bài toán
 
-Nhóm thực hiện bài toán **phân loại thu nhập** trên bộ dữ liệu **Adult Income Dataset**.
+Nhóm thực hiện bài toán **phân loại thu nhập** (binary classification) trên bộ dữ liệu **Adult Census Income**.
 
-- **Input:** các đặc trưng nhân khẩu học và nghề nghiệp
-- **Output:** dự đoán mức thu nhập
+- **Input:** các đặc trưng nhân khẩu học và nghề nghiệp (tuổi, học vấn, tình trạng hôn nhân, nghề nghiệp, số giờ làm việc, ...)
+- **Output:** dự đoán mức thu nhập cá nhân mỗi năm
   - `<=50K`
   - `>50K`
 
 ---
 
-## Tiến độ hiện tại
+## Mục tiêu bài tập lớn
 
-### Đã hoàn thành
-- Khảo sát dữ liệu ban đầu
-- Kiểm tra missing value và giá trị bất thường
-- Phân tích phân phối target
-- Phân tích một số đặc trưng số và đặc trưng phân loại quan trọng
-- Chuẩn hóa missing value
-- Loại bỏ một số cột không cần thiết / trùng lặp
-- Xây dựng và so sánh nhiều cấu hình preprocessing
-- Chọn shared preprocessing config hiện tại để dùng cho các bước tiếp theo
-
-### Đã có trong notebook
-- Classical / Traditional Pipeline (`03_classical_pipeline.ipynb`)
-- Deep Learning Pipeline — MLP và TabNet (`04_deep_learning.ipynb`)
-- Notebook tổng hợp (`05_main.ipynb`)
-
-### Sẽ chỉnh sửa / bổ sung khi cần
-- So sánh và trình bày kết quả trong báo cáo cuối kỳ
-- Tinh chỉnh thử nghiệm (ví dụ bật lại các cell Optuna tốn thời gian)
+1. **Xây dựng pipeline học máy hoàn chỉnh** — từ khám phá dữ liệu (EDA), tiền xử lý, trích xuất đặc trưng, huấn luyện, tinh chỉnh siêu tham số đến đánh giá và triển khai.
+2. **So sánh nhiều mô hình trên cùng bộ dữ liệu** — Logistic Regression, Linear SVM, Random Forest, Gaussian Naive Bayes (pipeline truyền thống) và MLP, TabNet (pipeline học sâu).
+3. **Phân tích ảnh hưởng của tiền xử lý** — so sánh các cấu hình preprocessing khác nhau, lựa chọn cấu hình tốt nhất dựa trên thực nghiệm.
+4. **Đánh giá tính phù hợp của học sâu trên dữ liệu bảng** — kiểm chứng xem MLP hay TabNet có thực sự vượt trội hơn các mô hình truyền thống không.
+5. **Tăng khả năng diễn giải và tái sử dụng** — phân tích feature importance, tổ chức code dạng module, triển khai ứng dụng web bằng Streamlit.
 
 ---
 
-## Yêu cầu
+## Kết quả tóm tắt
 
-- **Python:** khuyến nghị 3.10, 3.11 hoặc 3.12 (tương thích PyTorch và scikit-learn).
-- **RAM / thời gian chạy:** notebook deep learning và TabNet tốn tài nguyên hơn classical ML; có thể chạy trên CPU (chậm hơn GPU).
-- **Mạng:** notebook EDA và các notebook sau tải dữ liệu từ URL công khai (GitHub); cần kết nối Internet khi chạy lần đầu.
+| Mô hình | Accuracy | F1-Score | ROC-AUC |
+|---|---|---|---|
+| Logistic Regression (baseline) | 0.8074 | 0.6760 | 0.9051 |
+| **Random Forest (tuned)** ✅ | **0.8341** | **0.7050** | **0.9175** |
+| MLP (Optuna) | 0.8101 | 0.6919 | 0.9102 |
+| TabNet (Optuna) | 0.8136 | 0.6835 | 0.9029 |
+
+**Mô hình tốt nhất:** Random Forest (tuned) — pipeline học máy truyền thống với F1-Score = 0.7050, ROC-AUC = 0.9175.
+
+---
+
+## Yêu cầu hệ thống
+
+- **Python:** 3.10, 3.11 hoặc 3.12 (khuyến nghị)
+- **RAM:** tối thiểu 4 GB; notebook deep learning và TabNet tốn nhiều tài nguyên hơn
+- **GPU (tuỳ chọn):** hỗ trợ CUDA để tăng tốc huấn luyện MLP/TabNet
+- **Kết nối Internet:** cần thiết khi tải dữ liệu từ URL công khai lần đầu
 
 ---
 
@@ -81,45 +98,47 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Cài các thư viện
+### 3. Cài đặt thư viện
 
 ```bash
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-**PyTorch với GPU (CUDA):** `pip install -r requirements.txt` thường cài bản PyTorch hỗ trợ CPU. Nếu cần GPU, cài trước PyTorch (build CUDA) theo lệnh tại [pytorch.org](https://pytorch.org/get-started/locally/), sau đó cài phần còn lại; nếu `pip` cố ghi đè PyTorch, tạm thời bỏ hoặc comment dòng `torch` trong `requirements.txt` rồi chạy lại `pip install -r requirements.txt`.
+> **PyTorch với GPU (CUDA):** `pip install -r requirements.txt` mặc định cài bản CPU.  
+> Nếu cần GPU, cài PyTorch (CUDA build) theo hướng dẫn tại [pytorch.org](https://pytorch.org/get-started/locally/) trước, sau đó comment dòng `torch` trong `requirements.txt` rồi chạy lại lệnh cài.
 
 ### 4. Khởi chạy Jupyter
-
-Từ thư mục gốc của project:
 
 ```bash
 jupyter notebook
 ```
 
-hoặc dùng JupyterLab / VS Code mở từng file `.ipynb` trong `notebooks/`.
+Hoặc mở từng file `.ipynb` trong `notebooks/` bằng JupyterLab / VS Code.
 
-### 5. Thứ tự và cách chạy notebook
+### 5. Thứ tự chạy notebook
 
-- Các notebook gắn thư mục `modules/` bằng `sys.path.insert(0, os.path.abspath('..'))`, nghĩa là **`modules` là gói Python ở cấp cha của `notebooks/`**. Hãy mở hoặc chạy notebook khi working directory là `notebooks/` (cách Jupyter mặc định khi mở file trong thư mục đó) để đường dẫn tương đối đúng.
-- **Thứ tự khuyến nghị:**
-  1. `01_eda.ipynb` — khám phá dữ liệu  
-  2. `02_preprocessing.ipynb` — tiền xử lý, chọn shared config  
-  3. `03_classical_pipeline.ipynb` — mô hình truyền thống  
-  4. `04_deep_learning.ipynb` — MLP, TabNet, Optuna (một số cell Optuna được mock / comment để chạy nhanh; có thể bật lại để chạy đầy đủ, thời gian lâu)  
-  5. `05_main.ipynb` — tổng hợp pipeline (tuỳ mục đích báo cáo)
+> Các notebook sử dụng `sys.path.insert(0, os.path.abspath('..'))` để import từ `modules/`. Hãy đảm bảo working directory là `notebooks/` khi chạy (mặc định của Jupyter khi mở file trong thư mục đó).
 
-Notebook `05_main.ipynb` có thể chạy độc lập nếu đã có đầy đủ thư viện và dữ liệu tải được; các notebook khác nên đọc theo thứ tự để hiểu luồng xử lý.
+| Thứ tự | Notebook | Nội dung |
+|---|---|---|
+| 1 | `01_eda.ipynb` | Khám phá và phân tích dữ liệu |
+| 2 | `02_preprocessing.ipynb` | Tiền xử lý và so sánh cấu hình preprocessing |
+| 3 | `03_classical_pipeline.ipynb` | Pipeline học máy truyền thống |
+| 4 | `04_deep_learning.ipynb` | Pipeline học sâu (MLP, TabNet, Optuna) |
+| 5 | `05_main.ipynb` | Notebook tổng hợp — kết quả cuối cùng |
 
-### 6. Khởi chạy ứng dụng Web (Streamlit)
+> **Lưu ý:** Notebook `05_main.ipynb` có thể chạy độc lập nếu đã có đủ thư viện và dữ liệu. Một số cell Optuna/TabNet trong `04_deep_learning.ipynb` được mock/comment để chạy nhanh — bật lại khi cần số liệu chính xác.
 
-Nhóm đã phát triển giao diện người dùng dựa trên Streamlit để dự đoán trực tiếp từ trình duyệt. Tại thư mục gốc của dự án, hãy chạy:
+### 6. Chạy ứng dụng Web (Streamlit)
 
 ```bash
 streamlit run app.py
 ```
-Sau đó truy cập đường dẫn `http://localhost:8501` hiển thị trên terminal để sử dụng ứng dụng.
+
+Sau đó truy cập `http://localhost:8501` để sử dụng giao diện dự đoán thu nhập trực tiếp.
+
+> **Lưu ý:** Ứng dụng yêu cầu các file model đã được lưu trong `models/`. Nếu thiếu, hãy chạy `04_deep_learning.ipynb` trước để sinh các file cần thiết.
 
 ---
 
@@ -127,110 +146,91 @@ Sau đó truy cập đường dẫn `http://localhost:8501` hiển thị trên t
 
 ```text
 ml-project-group10/
-├── modules/                    # Logic Python dùng chung cho notebook
-│   ├── eda.py
-│   ├── preprocessing.py
-│   ├── classical_learning.py
-│   ├── deep_learning.py
-│   ├── tuning.py
-│   └── mappings.py             
+├── data/
+│   └── adult.csv                   # Bộ dữ liệu Adult Census Income
+├── features/                       # Đặc trưng trung gian được lưu lại
+│   └── .gitkeep
+├── models/                         # Model và các bộ tiền xử lý đã lưu
+│   ├── best_dl_model.pth           # Model học sâu tốt nhất (PyTorch)
+│   ├── best_f1_score.txt           # F1-score của model tốt nhất
+│   ├── best_model_type.txt         # Loại model tốt nhất
+│   ├── ohe_encoder.joblib          # Bộ mã hóa One-Hot Encoder
+│   └── scaler.joblib               # Bộ chuẩn hóa StandardScaler
+├── modules/                        # Logic Python dùng chung cho notebook
+│   ├── eda.py                      # Hàm phân tích khám phá dữ liệu
+│   ├── preprocessing.py            # Pipeline tiền xử lý dữ liệu
+│   ├── classical_learning.py       # Huấn luyện và đánh giá mô hình truyền thống
+│   ├── deep_learning.py            # Mô hình MLP và TabNet
+│   ├── tuning.py                   # Tối ưu siêu tham số bằng Optuna
+│   └── mappings.py                 # Ánh xạ nhãn và cấu hình dùng chung
 ├── notebooks/
-│   ├── 01_eda.ipynb
-│   ├── 02_preprocessing.ipynb
-│   ├── 03_classical_pipeline.ipynb
-│   ├── 04_deep_learning.ipynb
-│   └── 05_main.ipynb
-├── app.py                      
-├── requirements.txt
+│   ├── 01_eda.ipynb                # Phân tích khám phá dữ liệu
+│   ├── 02_preprocessing.ipynb      # Tiền xử lý và so sánh cấu hình
+│   ├── 03_classical_pipeline.ipynb # Pipeline học máy truyền thống
+│   ├── 04_deep_learning.ipynb      # Pipeline học sâu (MLP, TabNet, Optuna)
+│   └── 05_main.ipynb               # Notebook tổng hợp / kết quả cuối cùng
+├── reports/
+│   ├── final/                      # Báo cáo cuối kỳ
+│   └── progress/                   # Báo cáo tiến độ
+├── app.py                          # Ứng dụng web Streamlit
+├── requirements.txt                # Danh sách thư viện cần cài
 └── README.md
 ```
 
-### Mô tả các notebook
+---
 
-* `01_eda.ipynb`: phân tích khám phá dữ liệu
-* `02_preprocessing.ipynb`: tiền xử lý dữ liệu và so sánh các cấu hình preprocessing
-* `03_classical_pipeline.ipynb`: triển khai pipeline truyền thống
-* `04_deep_learning.ipynb`: triển khai pipeline học sâu
-* `05_main.ipynb`: notebook tổng hợp / kết quả cuối cùng
+## Mô tả chi tiết các module
 
-> Lưu ý: một số notebook có thể đang được hoàn thiện dần và sẽ tiếp tục được cập nhật trên branch `dev`.
+### `modules/eda.py`
+Các hàm hỗ trợ phân tích khám phá dữ liệu (EDA): thống kê mô tả, trực quan hóa phân phối biến mục tiêu, phân tích giá trị thiếu, phân tích biến số và biến phân loại.
+
+### `modules/preprocessing.py`
+Xây dựng pipeline tiền xử lý bằng `Pipeline` và `ColumnTransformer` của scikit-learn. Hỗ trợ nhiều cấu hình (chuẩn hóa, mã hóa one-hot, xử lý missing value), chia tập train/test có stratify và xuất shared preprocessing config.
+
+### `modules/classical_learning.py`
+Huấn luyện và đánh giá các mô hình học máy truyền thống: Logistic Regression, Linear SVM, Random Forest, Gaussian Naive Bayes. Bao gồm baseline training, GridSearchCV, RandomizedSearchCV và phân tích feature importance.
+
+### `modules/deep_learning.py`
+Định nghĩa kiến trúc MLP (PyTorch) và tích hợp TabNet (pytorch-tabnet). Bao gồm vòng huấn luyện, early stopping, learning rate scheduling và lưu model.
+
+### `modules/tuning.py`
+Tối ưu siêu tham số bằng Optuna (TPESampler + MedianPruner) cho cả MLP và TabNet. Hỗ trợ pretraining tự giám sát cho TabNet.
+
+### `modules/mappings.py`
+Ánh xạ nhãn và các hằng số cấu hình dùng chung giữa notebook và ứng dụng Streamlit.
 
 ---
 
-## EDA
+## EDA — Những phát hiện chính
 
-Notebook `01_eda.ipynb` tập trung vào:
-
-* tổng quan dữ liệu
-* kiểu dữ liệu và thống kê mô tả
-* kiểm tra missing value
-* phân phối biến mục tiêu
-* phân tích các đặc trưng quan trọng theo target
-* kiểm tra một số biến có outlier hoặc phân phối lệch
-
-EDA được dùng để hỗ trợ các quyết định ở bước preprocessing và định hướng cho phần modeling.
+- **Mất cân bằng lớp:** ~76% mẫu thuộc nhóm `<=50K`, chỉ ~24% thuộc nhóm `>50K` → ưu tiên F1-score thay vì Accuracy.
+- **Giá trị thiếu:** ký hiệu `?` xuất hiện ở `workclass` (2,799 mẫu), `occupation` (2,809 mẫu), `native-country` (857 mẫu).
+- **Đặc trưng dư thừa:** `education` và `educational-num` phản ánh cùng thông tin; `fnlwgt` là trọng số điều tra không liên quan trực tiếp đến bài toán → loại bỏ cả hai.
+- **Biến số lệch phân phối:** `capital-gain` và `capital-loss` có phân phối lệch phải mạnh (phần lớn = 0).
 
 ---
 
-## Preprocessing
+## Tiền xử lý — Cấu hình được chọn
 
-Notebook `02_preprocessing.ipynb` hiện đang là cơ sở cho phần modeling tiếp theo.
+Nhóm so sánh 4 cấu hình preprocessing bằng Logistic Regression, lấy F1-score làm tiêu chí chọn:
 
-Các bước chính:
+| Cấu hình | Missing categorical | Biến số | F1-score | Số đặc trưng |
+|---|---|---|---|---|
+| **C2** ✅ | Điền hằng `Missing` | StandardScaler | **0.6649** | 91 |
+| C1 | Điền most frequent | StandardScaler | 0.6578 | 88 |
+| C3 | Điền most frequent | MinMaxScaler | 0.6553 | 88 |
+| C4 | Điền most frequent | Không chuẩn hóa | 0.6583 | 88 |
 
-* thay thế `?` bằng `NaN`
-* loại bỏ:
-
-  * `education`
-  * `fnlwgt`
-* tách `X` và `y`
-* chia train/test
-* xác định numerical features và categorical features
-* xây dựng nhiều cấu hình preprocessing
-* so sánh các cấu hình để chọn shared config hiện tại
-
-### Shared preprocessing config hiện tại
-
-`config_2_onehot_constant_standard`
-
-Cấu hình này hiện được dùng làm mốc chung cho các bước triển khai tiếp theo. Nếu sau này nhóm thống nhất đổi config, cần cập nhật lại notebook liên quan và ghi rõ trong commit.
-
----
-
-## Hướng phát triển tiếp theo
-
-### 1. Classical / Traditional Pipeline
-
-* huấn luyện và đánh giá các mô hình học máy truyền thống
-* tuning và so sánh kết quả
-* phân tích hiệu năng giữa các cấu hình / mô hình
-
-### 2. Deep Learning Pipeline
-
-* xây dựng mô hình học sâu phù hợp với dữ liệu tabular
-* huấn luyện, theo dõi loss / metric
-* đánh giá và so sánh với pipeline truyền thống
-
-### 3. Final Summary
-
-* tổng hợp kết quả
-* so sánh hai hướng tiếp cận
-* rút ra kết luận cuối cùng
+**Cấu hình được chọn:** `config_2_onehot_constant_standard` (91 đặc trưng sau One-Hot Encoding).
 
 ---
 
 ## Quy ước làm việc trên branch `dev`
 
-* `dev` là branch tích hợp chung của nhóm
-* các thay đổi lớn nên được thực hiện trước trên branch nhiệm vụ riêng, sau đó mới merge vào `dev`
-* không chỉnh sửa trực tiếp các file tổng hợp khi chưa thống nhất
-* khi update notebook, nên đảm bảo notebook có thể chạy lại hợp lý
-* khi shared config thay đổi, cần ghi rõ trong commit / pull request
+- `dev` là branch tích hợp chung của nhóm.
+- Thay đổi lớn nên thực hiện trên branch nhiệm vụ riêng, sau đó mới merge vào `dev`.
+- Không sửa trực tiếp các file tổng hợp khi chưa thống nhất trong nhóm.
+- Khi cập nhật notebook, đảm bảo notebook có thể chạy lại hợp lý từ đầu.
+- Khi shared config thay đổi, ghi rõ trong commit message và đồng bộ các notebook liên quan.
 
----
-
-## Ghi chú
-
-- Cập nhật shared preprocessing (`config_*` trong `02_preprocessing.ipynb`) thì nhớ đồng bộ các notebook phía sau và ghi rõ trong commit.
-- Cell chạy Optuna / huấn luyện dài trong `04_deep_learning.ipynb` và `05_main.ipynb` có thể được giữ mock hoặc comment để chạy nhanh; khi báo cáo cần số đo mới, bật chạy lại và chờ đủ thời gian.
 
