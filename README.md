@@ -1,5 +1,5 @@
-# ml-project-group10
-
+BÀI TẬP LỚN MÔN HỌC MÁY - HK 252
+> # ml-project-group10
 > **Môn học:** Học Máy — **Mã môn:** CO3117 — **Học kỳ:** 252 — **Năm học:** 2025–2026
 
 ---
