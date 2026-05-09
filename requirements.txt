@@ -24,3 +24,6 @@ optuna>=3.5.0,<5
 # Chạy notebook cục bộ
 jupyter>=1.0.0,<2
 ipykernel>=6.25.0,<7
+
+# Triển khai Web App
+streamlit>=1.57.0
