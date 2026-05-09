@@ -1,6 +1,8 @@
-BÀI TẬP LỚN MÔN HỌC MÁY - HK 252
-> # ml-project-group10
-> **Môn học:** Học Máy — **Mã môn:** CO3117 — **Học kỳ:** 252 — **Năm học:** 2025–2026
+# Bài Tập Lớn Môn Học Máy
+
+### ml-project-group10
+
+**Môn học:** Học Máy &nbsp;|&nbsp; **Mã môn:** CO3117 &nbsp;|&nbsp; **Học kỳ:** 252 &nbsp;|&nbsp; **Năm học:** 2025–2026
 
 ---
 
@@ -199,36 +201,26 @@ Tối ưu siêu tham số bằng Optuna (TPESampler + MedianPruner) cho cả MLP
 
 ---
 
-## EDA — Những phát hiện chính
-
-- **Mất cân bằng lớp:** ~76% mẫu thuộc nhóm `<=50K`, chỉ ~24% thuộc nhóm `>50K` → ưu tiên F1-score thay vì Accuracy.
-- **Giá trị thiếu:** ký hiệu `?` xuất hiện ở `workclass` (2,799 mẫu), `occupation` (2,809 mẫu), `native-country` (857 mẫu).
-- **Đặc trưng dư thừa:** `education` và `educational-num` phản ánh cùng thông tin; `fnlwgt` là trọng số điều tra không liên quan trực tiếp đến bài toán → loại bỏ cả hai.
-- **Biến số lệch phân phối:** `capital-gain` và `capital-loss` có phân phối lệch phải mạnh (phần lớn = 0).
-
----
-
-## Tiền xử lý — Cấu hình được chọn
-
-Nhóm so sánh 4 cấu hình preprocessing bằng Logistic Regression, lấy F1-score làm tiêu chí chọn:
-
-| Cấu hình | Missing categorical | Biến số | F1-score | Số đặc trưng |
-|---|---|---|---|---|
-| **C2** ✅ | Điền hằng `Missing` | StandardScaler | **0.6649** | 91 |
-| C1 | Điền most frequent | StandardScaler | 0.6578 | 88 |
-| C3 | Điền most frequent | MinMaxScaler | 0.6553 | 88 |
-| C4 | Điền most frequent | Không chuẩn hóa | 0.6583 | 88 |
-
-**Cấu hình được chọn:** `config_2_onehot_constant_standard` (91 đặc trưng sau One-Hot Encoding).
-
----
-
 ## Quy ước làm việc trên branch `dev`
 
-- `dev` là branch tích hợp chung của nhóm.
-- Thay đổi lớn nên thực hiện trên branch nhiệm vụ riêng, sau đó mới merge vào `dev`.
-- Không sửa trực tiếp các file tổng hợp khi chưa thống nhất trong nhóm.
-- Khi cập nhật notebook, đảm bảo notebook có thể chạy lại hợp lý từ đầu.
-- Khi shared config thay đổi, ghi rõ trong commit message và đồng bộ các notebook liên quan.
+### Luồng làm việc
+- `dev` là branch tích hợp chung — **không làm việc trực tiếp trên `dev`**.
+- Mỗi thành viên làm việc theo phân công trên **branch cá nhân riêng**, đặt tên theo quy tắc `feature/<tên-nhiệm-vụ>`, ví dụ:
+  - `feature/eda`
+  - `feature/preprocessing`
+  - `feature/classical-pipeline`
+  - `feature/deep-learning`
+- Sau khi hoàn thành nhiệm vụ trên branch cá nhân, tạo **Pull Request** vào `dev` và thông báo cho nhóm trưởng review trước khi merge.
 
+### Quy tắc bắt buộc
+- **Không sửa trực tiếp** các file tổng hợp (`05_main.ipynb`, `app.py`, `requirements.txt`, `README.md`) khi chưa thống nhất với cả nhóm.
+- **Không dùng `git push --force`** (force push) lên bất kỳ branch nào — đây là hành vi **bị nghiêm cấm** vì có thể xóa mất lịch sử commit của người khác.
+- Khi cập nhật notebook, đảm bảo notebook có thể chạy lại từ đầu một cách hợp lý (restart kernel & run all).
+- Khi shared preprocessing config thay đổi, phải đồng bộ tất cả notebook liên quan và ghi rõ trong commit message.
 
+---
+
+## Ghi chú
+
+- Cell Optuna / huấn luyện dài trong `04_deep_learning.ipynb` và `05_main.ipynb` có thể được giữ mock hoặc comment để chạy nhanh; khi cần số liệu mới, bật lại và chờ đủ thời gian.
+- Cập nhật shared preprocessing (`config_*` trong `02_preprocessing.ipynb`) thì nhớ đồng bộ các notebook phía sau và ghi rõ trong commit.
