@@ -112,6 +112,15 @@ hoặc dùng JupyterLab / VS Code mở từng file `.ipynb` trong `notebooks/`.
 
 Notebook `05_main.ipynb` có thể chạy độc lập nếu đã có đầy đủ thư viện và dữ liệu tải được; các notebook khác nên đọc theo thứ tự để hiểu luồng xử lý.
 
+### 6. Khởi chạy ứng dụng Web (Streamlit)
+
+Nhóm đã phát triển giao diện người dùng dựa trên Streamlit để dự đoán trực tiếp từ trình duyệt. Tại thư mục gốc của dự án, hãy chạy:
+
+```bash
+streamlit run app.py
+```
+Sau đó truy cập đường dẫn `http://localhost:8501` hiển thị trên terminal để sử dụng ứng dụng.
+
 ---
 
 ## Cấu trúc thư mục
@@ -123,13 +132,15 @@ ml-project-group10/
 │   ├── preprocessing.py
 │   ├── classical_learning.py
 │   ├── deep_learning.py
-│   └── tuning.py
+│   ├── tuning.py
+│   └── mappings.py             
 ├── notebooks/
 │   ├── 01_eda.ipynb
 │   ├── 02_preprocessing.ipynb
 │   ├── 03_classical_pipeline.ipynb
 │   ├── 04_deep_learning.ipynb
 │   └── 05_main.ipynb
+├── app.py                      
 ├── requirements.txt
 └── README.md
 ```
