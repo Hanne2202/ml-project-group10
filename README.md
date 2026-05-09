@@ -132,13 +132,15 @@ ml-project-group10/
 │   ├── preprocessing.py
 │   ├── classical_learning.py
 │   ├── deep_learning.py
-│   └── tuning.py
+│   ├── tuning.py
+│   └── mappings.py             
 ├── notebooks/
 │   ├── 01_eda.ipynb
 │   ├── 02_preprocessing.ipynb
 │   ├── 03_classical_pipeline.ipynb
 │   ├── 04_deep_learning.ipynb
 │   └── 05_main.ipynb
+├── app.py                      
 ├── requirements.txt
 └── README.md
 ```
